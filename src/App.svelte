@@ -1,28 +1,14 @@
 <script>
-	// import {db} from '/firebase.js'
-	// db.settings({timestampsInSnapshots: true});
+	import {db} from './firebase.js'
+	let cboList = [];
 
-	// Your web app's Firebase configuration
-	var firebaseConfig = {
-	  apiKey: "AIzaSyC8Yb45f3suXbaMFOnak9if7062WRs-h4s",
-	  authDomain: "sdoh-d42df.firebaseapp.com",
-	  databaseURL: "https://sdoh-d42df.firebaseio.com",
-	  projectId: "sdoh-d42df",
-	  storageBucket: "sdoh-d42df.appspot.com",
-	  messagingSenderId: "963007919921",
-	  appId: "1:963007919921:web:b9a6246439613f915da210"
-	};
-	// Initialize Firebase
-	firebase.initializeApp(firebaseConfig);
-
-	const db = firebase.firestore();
-
-	db.collection('cbos').get().then((snapshot) => {
-		snapshot.docs.forEach((doc, i) => {
-			console.log(doc.data())
-		});
-
+	db.collection('cbos').onSnapshot((snapshot) => {
+		cboList = snapshot.docs;
+		// snapshot.docs.forEach((doc, i) => {
+		// 	console.log(doc.data())
+		// });
 	})
+
 	export let name;
 	let cbos = [];
 
@@ -34,11 +20,14 @@
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<section class="section">
+		<h1>Hello {name}!</h1>
+	</section>
 
-	{#each cbos as c(c.id)}
-		<p>{c.name}</p>
+	<input class="input" type="text" placeholder="Text input">
+
+	{#each cboList as c(c.id)}
+		<p>{c.data().program}</p>
 	{/each}
 </main>
 

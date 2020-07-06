@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "bulma": "^0.9.0",
-    "firebase": "^7.15.5",
     "sirv-cli": "^0.4.4"
   }
 }
