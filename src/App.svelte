@@ -1,6 +1,11 @@
 <script>
 	import {db} from './firebase.js'
+	import DemoInput from './DemoInput.svelte'
+	import Slider from '@smui/slider/bare.js'
+	import '@smui/slider/bare.css'
+
 	let cboList = [];
+	let NutritionVal = 0;
 
 	db.collection('cbos').onSnapshot((snapshot) => {
 		cboList = snapshot.docs;
@@ -20,11 +25,17 @@
 </script>
 
 <main>
-	<section class="section">
-		<h1>Hello {name}!</h1>
-	</section>
+	<div class="columns">
+		<div class="column">
+			<h1>Hello {name}!</h1>
+		</div>
+		<div class="column">
+			<Slider bind:NutritionVal />
+			<DemoInput />
+		</div>
+	</div>
 
-	<input class="input" type="text" placeholder="Text input">
+
 
 	{#each cboList as c(c.id)}
 		<p>{c.data().program}</p>
